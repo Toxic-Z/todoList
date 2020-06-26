@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Page404Component } from './components/page404/page404.component';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -11,9 +12,10 @@ import { Page404Component } from './components/page404/page404.component';
   exports: [
     HeaderComponent
   ],
-  imports: [
-    CommonModule,
-    MatToolbarModule
-  ]
+    imports: [
+        CommonModule,
+        MatToolbarModule,
+        MatButtonModule
+    ]
 })
 export class SharedModule { }

@@ -2,5 +2,11 @@
   color="primary"
   class="header"
 >
-
+  <h6>ToDoList Project</h6>
+  <button
+    *ngIf="isLog()"
+    mat-raised-button
+    color="warn"
+    (click)="logOut()">
+    Log out</button>
 </mat-toolbar>
