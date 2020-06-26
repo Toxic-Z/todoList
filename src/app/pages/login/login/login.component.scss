@@ -9,6 +9,9 @@
     flex-direction: column;
     mat-form-field {
       min-width: 35%;
+      .mat-form-field-suffix {
+        display: flex;
+      }
     }
     .login-buttons {
       display: flex;

@@ -18,10 +18,16 @@
       <input
         formControlName="password"
         matInput
+        [type]="hide ? 'password' : 'text'"
         placeholder="Password">
       <mat-icon
         class="cursor-pointer"
-        matTooltip="Password should be min 8 symbols length"
+        (click)="hide = !hide"
+        matSuffix
+      >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-icon
+        class="cursor-pointer"
+        matTooltip="Password should be min 6 symbols length"
         *ngIf="form.controls.password.errors && form.controls.password.touched"
         matSuffix>error</mat-icon>
     </mat-form-field>

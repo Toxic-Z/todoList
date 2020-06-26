@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {AuthService} from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,14 +13,13 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
   }
 
-  public logOut() {
+  public logOut(): void {
     this.authService.logOut();
   }
 
-  public isLog() {
+  public isLog(): boolean {
     return this.authService.isLog();
   }
 

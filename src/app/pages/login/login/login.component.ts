@@ -3,6 +3,8 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from '../../../shared/interfaces/user';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -42,17 +44,35 @@ export class LoginComponent implements OnInit {
   }
 
   public signUp() {
-    this.authService.signUp({
-      email: this.form.get('email').value,
-      password: btoa(this.form.get('password').value)
-    });
+    this.authService.checkUserForUnique(this.form.get('email').value)
+      .pipe(
+        map(r => !r.length)
+      )
+      .subscribe((r: boolean) => {
+        if (r) {
+          const user: User = {
+            email: this.form.get('email').value,
+            password: btoa(this.form.get('password').value),
+            id: Math.random()
+          };
+          this.authService.signUp(user).subscribe((u: User) => {
+            localStorage.setItem('login', 'true');
+            this.router.navigate(['dashboard'])
+          });
+        } else {
+          this.openSnackBar('This user exists!', 'Ok');
+        }
+      });
   }
 
   public logIn() {
     this.authService.logIn({
       email: this.form.get('email').value,
       password: btoa(this.form.get('password').value)
+    }).subscribe((u: User[]) => {
+      const isLoggedIn = u.length && atob(u[0].password) === this.form.get('password').value;
+      localStorage.setItem('login', isLoggedIn ? 'true' : 'false');
+      isLoggedIn ? this.router.navigate(['dashboard']) : this.openSnackBar('Wrong user or password', 'Ok');
     });
-    this.authService.isLog() ? this.router.navigate(['dashboard']) : this.openSnackBar('Wrong user', 'Ok');
   }
 }
