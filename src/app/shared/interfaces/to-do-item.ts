@@ -1,7 +1,7 @@
 export interface ToDoItem {
-  id: string;
+  id: number;
   name: string;
   description: string;
-  createdAt: Date;
-  editedAt: Date;
+  createdAt: string;
+  editedAt: string;
 }

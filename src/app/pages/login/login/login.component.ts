@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
           };
           this.authService.signUp(user).subscribe((u: User) => {
             localStorage.setItem('login', 'true');
-            this.router.navigate(['dashboard'])
+            this.router.navigate(['dashboard']);
           });
         } else {
           this.openSnackBar('This user exists!', 'Ok');

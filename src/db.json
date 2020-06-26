@@ -1,4 +1,32 @@
 {
   "users": [
+    {
+      "email": "admin@admin",
+      "password": "MTIzNDU2",
+      "id": 0.30961159144380157
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "name": "Todos #1",
+      "description": "its a description of first todos",
+      "createdAt": "somestring",
+      "editedAt": "string"
+    },
+    {
+      "id": 2,
+      "name": "Todos #2",
+      "description": "its a description of first todos",
+      "createdAt": "somestring",
+      "editedAt": "string"
+    },
+    {
+      "id": 3,
+      "name": "Todos #3",
+      "description": "its a description of first todos",
+      "createdAt": "somestring",
+      "editedAt": "string"
+    }
   ]
 }
