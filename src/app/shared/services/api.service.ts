@@ -17,7 +17,7 @@ export class ApiService {
     return this.httpClient.get<ToDoItem[]>(this.url + 'todos');
   }
 
-  public fetchTodoById(id: number): Observable<ToDoItem> {
+  public fetchTodoById(id: string): Observable<ToDoItem> {
     return this.httpClient.get<ToDoItem>(this.url + `todos?id=${id}`);
   }
 
@@ -26,7 +26,10 @@ export class ApiService {
   }
 
   public updateTodo(t: ToDoItem): Observable<ToDoItem> {
-    console.log(t)
     return this.httpClient.put<ToDoItem>(this.url + `todos/${t.id}`, t);
+  }
+
+  public deleteTodo(t: ToDoItem): Observable<ToDoItem> {
+    return this.httpClient.delete<ToDoItem>(this.url + `todos/${t.id}`);
   }
 }

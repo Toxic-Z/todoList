@@ -22,6 +22,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
         <textarea
+          rows="10"
           formControlName="description"
           matInput
           placeholder="Description">
@@ -34,6 +35,7 @@
       </mat-form-field>
       <div class="btns">
         <button
+          (click)="deleteTodo()"
           [disabled]="!currTodo"
           mat-flat-button
           color="warn">Delete</button>

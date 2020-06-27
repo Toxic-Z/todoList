@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../../../shared/interfaces/user';
 import { map } from 'rxjs/operators';
+import { CommonService } from '../../../shared/services/common.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private commonService: CommonService
   ) { }
 
   ngOnInit(): void {
@@ -53,7 +55,7 @@ export class LoginComponent implements OnInit {
           const user: User = {
             email: this.form.get('email').value,
             password: btoa(this.form.get('password').value),
-            id: Math.random()
+            id: this.commonService.getRandomInt(100, 1000)
           };
           this.authService.signUp(user).subscribe((u: User) => {
             localStorage.setItem('login', 'true');

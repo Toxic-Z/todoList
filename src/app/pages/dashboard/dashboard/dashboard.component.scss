@@ -7,4 +7,20 @@
     padding-bottom: 2%;
     justify-content: flex-end;
   }
+  mat-row:hover {
+    background-color: #3f51b52e;
+    cursor: pointer;
+  }
+  .control-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    button {
+      position: relative;
+      z-index: 5;
+      &:first-child {
+        margin-right: 3rem;
+      }
+    }
+  }
 }

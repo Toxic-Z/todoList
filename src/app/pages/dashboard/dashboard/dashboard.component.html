@@ -33,12 +33,21 @@
     <ng-container matColumnDef="buttons">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
-
+        <div class="control-buttons">
+          <button
+            (click)="deleteTodo()"
+            mat-flat-button
+            color="warn">Delete</button>
+          <button
+            (click)="toCrudPage(element)"
+            mat-flat-button
+            color="primary">Edit</button>
+        </div>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row (click)="toCrudPage(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
 

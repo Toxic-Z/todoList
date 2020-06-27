@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { ToDoItem } from '../../interfaces/to-do-item';
 import * as moment from 'moment';
+import { CommonService } from '../../services/common.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-todo-crud',
@@ -16,7 +19,9 @@ export class TodoCrudComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private commonService: CommonService,
+    public dialog: MatDialog
   ) {
     if (this.route.snapshot.paramMap.get('id') === 'new') {
       this.form = new FormGroup({
@@ -32,7 +37,7 @@ export class TodoCrudComponent implements OnInit {
         ])
       });
     } else {
-      this.apiService.fetchTodoById(parseInt(this.route.snapshot.paramMap.get('id'), 10)).subscribe((t: ToDoItem) => {
+      this.apiService.fetchTodoById(this.route.snapshot.paramMap.get('id')).subscribe((t: ToDoItem) => {
         this.currTodo = t;
         this.form = new FormGroup({
           name: new FormControl(t[0].name, [
@@ -53,16 +58,17 @@ export class TodoCrudComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public toDashboard() {
+  public toDashboard(): void {
     this.router.navigate(['dashboard']);
   }
 
-  public saveTodo() {
+  public saveTodo(): void {
     const todo: ToDoItem = {
       name: this.form.get('name').value,
       description: this.form.get('description').value,
-      id: this.route.snapshot.paramMap.get('id') === 'new' ? '' : this.currTodo.id,
-      createdAt: this.route.snapshot.paramMap.get('id') === 'new' ? moment(new Date()).format('YYYY-MM-DD HH:mm') : this.currTodo.createdAt,
+      id: this.route.snapshot.paramMap.get('id') === 'new' ? this.commonService.getRandomInt(1, 500) : this.currTodo[0].id,
+      createdAt: this.route.snapshot.paramMap.get('id') === 'new' ?
+        moment(new Date()).format('YYYY-MM-DD HH:mm') : this.currTodo[0].createdAt,
       editedAt: moment(new Date()).format('YYYY-MM-DD HH:mm')
     };
     if (this.route.snapshot.paramMap.get('id') === 'new') {
@@ -70,10 +76,33 @@ export class TodoCrudComponent implements OnInit {
         this.router.navigate(['dashboard']);
       });
     } else {
-      this.apiService.updateTodo(todo).subscribe((t: ToDoItem) => {
-        console.log(t)
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        width: '300px',
+        height: '200px',
+        data: {type: 'edit'}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.apiService.updateTodo(todo).subscribe((t: ToDoItem) => {
+            this.router.navigate(['dashboard']);
+          });
+        }
       });
     }
   }
 
+  public deleteTodo(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      height: '200px',
+      data: {type: 'delete'}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.apiService.deleteTodo(this.currTodo[0]).subscribe((t: ToDoItem) => {
+          this.router.navigate(['dashboard']);
+        });
+      }
+    });
+  }
 }
