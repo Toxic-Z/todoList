@@ -1,4 +1,7 @@
-<div id="dashboard">
+<div
+  *ngIf="(todos|async) as todosList"
+  id="dashboard">
+
   <div class="add-button-place">
     <button
       (click)="toNewTodo()"
@@ -6,13 +9,14 @@
       color="primary">
       Create new one</button>
   </div>
+
   <mat-table
-    *ngIf="todos|async"
-    [dataSource]="todos|async" class="mat-elevation-z8">
+    *ngIf="todosList.length"
+    [dataSource]="todosList" class="mat-elevation-z8">
 
     <ng-container matColumnDef="position">
       <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-      <mat-cell *matCellDef="let element; let i = index;">{{i + 1}}</mat-cell>
+      <mat-cell *matCellDef="let i = index;">{{i + 1}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
@@ -48,6 +52,7 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row (click)="toCrudPage(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
   </mat-table>
 </div>
 

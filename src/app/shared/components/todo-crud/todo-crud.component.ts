@@ -33,7 +33,7 @@ export class TodoCrudComponent implements OnInit {
         description: new FormControl('', [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(50)
+          Validators.maxLength(100)
         ])
       });
     } else {
@@ -48,7 +48,7 @@ export class TodoCrudComponent implements OnInit {
           description: new FormControl(t[0].description, [
             Validators.required,
             Validators.minLength(5),
-            Validators.maxLength(50)
+            Validators.maxLength(100)
           ])
         });
       });
