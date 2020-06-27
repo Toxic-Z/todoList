@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
   encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {
+
   constructor(
     private authService: AuthService
   ) { }

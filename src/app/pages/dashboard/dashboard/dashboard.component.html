@@ -10,9 +10,7 @@
       Create new one</button>
   </div>
 
-  <mat-table
-    *ngIf="todosList.length"
-    [dataSource]="todosList" class="mat-elevation-z8">
+  <mat-table *ngIf="todosList.length" [dataSource]="todosList" class="mat-elevation-z8">
 
     <ng-container matColumnDef="position">
       <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>

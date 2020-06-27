@@ -13,8 +13,10 @@ import { MatDialog } from '@angular/material/dialog';
   encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent implements OnInit {
+
   todos: Observable<ToDoItem[]>;
   displayedColumns: string[] = ['position', 'name', 'createdAt', 'editedAt', 'buttons'];
+
   constructor(
     private apiService: ApiService,
     private router: Router,

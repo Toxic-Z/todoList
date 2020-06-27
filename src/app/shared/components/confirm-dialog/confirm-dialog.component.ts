@@ -13,7 +13,7 @@ export class ConfirmDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {type: string, result: null}) {}
+    @Inject(MAT_DIALOG_DATA) public data: {type: string}) {}
 
   public onClick(type: boolean): void {
     this.dialogRef.close(type);

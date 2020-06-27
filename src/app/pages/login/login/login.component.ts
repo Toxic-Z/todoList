@@ -15,6 +15,7 @@ import { CommonService } from '../../../shared/services/common.service';
 
 })
 export class LoginComponent implements OnInit {
+
   form = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     ])
   });
   hide = true;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -55,7 +57,7 @@ export class LoginComponent implements OnInit {
           const user: User = {
             email: this.form.get('email').value,
             password: btoa(this.form.get('password').value),
-            id: this.commonService.getRandomInt(100, 1000)
+            id: this.commonService.getRandomInt(100, 1000).toString()
           };
           this.authService.signUp(user).subscribe((u: User) => {
             localStorage.setItem('login', 'true');

@@ -1,6 +1,7 @@
 <div id="login">
   <form
     [formGroup]="form">
+
     <mat-form-field appearance="outline">
       <mat-label>E-mail</mat-label>
       <input
@@ -13,6 +14,7 @@
         *ngIf="form.controls.email.errors && form.controls.email.touched"
         matSuffix>error</mat-icon>
     </mat-form-field>
+
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
       <input
@@ -23,14 +25,15 @@
       <mat-icon
         class="cursor-pointer"
         (click)="hide = !hide"
-        matSuffix
-      >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        matSuffix>
+        {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       <mat-icon
         class="cursor-pointer"
         matTooltip="Password should be min 6 symbols length"
         *ngIf="form.controls.password.errors && form.controls.password.touched"
         matSuffix>error</mat-icon>
     </mat-form-field>
+
     <div class="login-buttons">
       <button
         [disabled]="form.invalid"
@@ -43,5 +46,6 @@
         (click)="logIn()"
         color="primary">Login</button>
     </div>
+
    </form>
 </div>
