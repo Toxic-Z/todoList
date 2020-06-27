@@ -16,4 +16,17 @@ export class ApiService {
   public fetchTodos(): Observable<ToDoItem[]> {
     return this.httpClient.get<ToDoItem[]>(this.url + 'todos');
   }
+
+  public fetchTodoById(id: number): Observable<ToDoItem> {
+    return this.httpClient.get<ToDoItem>(this.url + `todos?id=${id}`);
+  }
+
+  public createTodo(t: ToDoItem): Observable<ToDoItem> {
+    return this.httpClient.post<ToDoItem>(this.url + 'todos', t);
+  }
+
+  public updateTodo(t: ToDoItem): Observable<ToDoItem> {
+    console.log(t)
+    return this.httpClient.put<ToDoItem>(this.url + `todos/${t.id}`, t);
+  }
 }

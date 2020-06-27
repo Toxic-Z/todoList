@@ -1,1 +1,49 @@
-<p>todo-crud works!</p>
+<div id="crud-page">
+  <button
+    (click)="toDashboard()"
+    mat-fab
+    color="primary">
+    <mat-icon>keyboard_backspace</mat-icon>
+  </button>
+  <div *ngIf="form" class="form-place">
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+          formControlName="name"
+          matInput
+          placeholder="Name">
+        <mat-icon
+          class="cursor-pointer"
+          matTooltip="Name should be from 3 to 10 symbols length"
+          *ngIf="form.controls.name.errors && form.controls.name.touched"
+          matSuffix>error</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          formControlName="description"
+          matInput
+          placeholder="Description">
+        </textarea>
+        <mat-icon
+          class="cursor-pointer"
+          matTooltip="Description should be from 5 to 50 symbols length"
+          *ngIf="form.controls.description.errors && form.controls.description.touched"
+          matSuffix>error</mat-icon>
+      </mat-form-field>
+      <div class="btns">
+        <button
+          [disabled]="!currTodo"
+          mat-flat-button
+          color="warn">Delete</button>
+        <button
+          (click)="saveTodo()"
+          [disabled]="form.invalid"
+          mat-flat-button
+          color="primary">Save</button>
+      </div>
+    </form>
+  </div>
+
+</div>

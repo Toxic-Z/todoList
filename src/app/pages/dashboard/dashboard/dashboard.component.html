@@ -6,8 +6,9 @@
       color="primary">
       Create new one</button>
   </div>
-
-  <mat-table [dataSource]="todos|async" class="mat-elevation-z8">
+  <mat-table
+    [hidden]="!(todos|async)"
+    [dataSource]="todos|async" class="mat-elevation-z8">
 
     <ng-container matColumnDef="position">
       <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>

@@ -1,0 +1,16 @@
+#crud-page {
+  display: flex;
+  padding: 2rem 0 0 2rem;
+  .form-place {
+    display: flex;
+    padding-left: 5rem;
+    form {
+      display: flex;
+      flex-direction: column;
+      .btns {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
