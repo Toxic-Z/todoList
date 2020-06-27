@@ -7,7 +7,7 @@
       Create new one</button>
   </div>
   <mat-table
-    [hidden]="!(todos|async)"
+    *ngIf="todos|async"
     [dataSource]="todos|async" class="mat-elevation-z8">
 
     <ng-container matColumnDef="position">
@@ -35,11 +35,11 @@
       <mat-cell *matCellDef="let element">
         <div class="control-buttons">
           <button
-            (click)="deleteTodo()"
+            (click)="deleteTodo(element); $event.stopPropagation()"
             mat-flat-button
             color="warn">Delete</button>
           <button
-            (click)="toCrudPage(element)"
+            (click)="toCrudPage(element); $event.stopPropagation()"
             mat-flat-button
             color="primary">Edit</button>
         </div>
